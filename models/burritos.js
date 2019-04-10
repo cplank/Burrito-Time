@@ -2,25 +2,17 @@ const orm = require("../config/orm.js");
 
 var burrito = {
     all: function (cb) {
-        orm.all("burritos", function (res) {
-            cb(res);
-        });
+        orm.all("burritos", cb);
     },
-    // The variables cols and vals are arrays.
-    create: function (cols, vals, cb) {
-        orm.create("burritos", cols, vals, function (res) {
-            cb(res);
-        });
+
+    create: function (row, cb) {
+        orm.create("burritos", row, cb);
     },
-    update: function (objColVals, condition, cb) {
-        orm.update("burritos", objColVals, condition, function (res) {
-            cb(res);
-        });
+    update: function (col, cond, cb) {
+        orm.update("burritos", col, cond, cb);
     },
-    delete: function (cols, condition, cb) {
-        orm.delete("burritos", cols, condition, function (res) {
-            cb(res);
-        })
+    delete: function (cond, cb) {
+        orm.delete("burritos", cols, cond, cb);
     }
 };
 
