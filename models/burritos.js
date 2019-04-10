@@ -16,5 +16,5 @@ var burrito = {
     }
 };
 
-// Export the database functions for the controller (burgers_controller.js).
+
 module.exports = burrito;

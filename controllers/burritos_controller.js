@@ -5,7 +5,7 @@ var router = express.Router();
 
 var burrito = require("../models/burritos")
 
-// Create all routes and set up logic w/in those routes where required
+
 router.get("/", function (req, res) {
     burrito.all(function (data) {
         var hbsObject = {
@@ -18,10 +18,11 @@ router.get("/", function (req, res) {
 
 
 router.post("/api/burritos", function (req, res) {
-    console.log(req.body);
+
     burrito.create(["burrito_name", "devoured"], [req.body.burrito_name, req.body.devoured], function (result) {
 
-        res.json({ id: result.insertId });
+        console.log(res.json({ id: result.insertId }));
+
     });
 });
 
