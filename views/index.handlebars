@@ -1,0 +1,42 @@
+<h1>Burrito Time!</h1>
+
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col s6">
+                {{#each burritos}}
+                {{#unless this.devoured}}
+                <div>
+                    <form action="/burritos/{{this.id}}?_method=PUT" method="POST">
+                        <button type="submit" class='burritoAvailable'> {{this.burrito_name}}</button>
+                    </form>
+                </div>
+                {{/unless}}
+                {{/each}}
+            </div>
+
+            <div class="col s6">
+                {{#each burrito}}
+                {{#if this.devoured}}
+                <div class='burritoEaten'>
+                    <div>
+                        {{this.burrito_name}}
+                    </div>
+                </div>
+                {{/if}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</main>
+
+<h2>Add A Burrito Option</h2>
+
+<div class="row">
+    <div class="col s12">
+        <form action="/burritos" method="POST">
+            <input type="text" id="name" name="burrito_name" placeholder="Uber Delicious Burrito">
+            <button type="submit" class="addBurritoButton">Add The Burrito</button>
+        </form>
+    </div>
+</div>
