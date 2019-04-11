@@ -4,40 +4,53 @@
     <div class="container">
         <div class="row">
             <div class="col s6">
-                {{#each burritos}}
-                {{#unless this.devoured}}
-                <div>
-                    <form action="/burritos/{{this.id}}?_method=PUT" method="POST">
-                        <button type="submit" class='burritoAvailable'> {{this.burrito_name}}</button>
-                    </form>
+                <div class="available-container float-right">
+                    {{#each burritos}}
+                    {{#unless this.devoured}}
+                    <div>
+                        <form action="/burritos/{{this.id}}?_method=PUT" method="POST">
+                            <button type="submit" class="btn btn-info burritoAvailable">
+                                {{this.burrito_name}}</button>
+                        </form>
+                    </div>
+
+                    {{/unless}}
+                    {{/each}}
                 </div>
-                {{/unless}}
-                {{/each}}
+            </div>
+            <div>
+                <img src="/assets/images/pusheen.png" />
             </div>
 
             {{!-- Consumed burritos go here --}}
-            <div class="col s6">
-                {{#each burritos}}
-                {{#if this.devoured}}
-                <div class='burritoEaten'>
-                    <div>
-                        {{this.burrito_name}}
+            <div class="col s6 float">
+                <div class="eaten-container float-right">
+                    {{#each burritos}}
+                    {{#if this.devoured}}
+                    <div class='burritoEaten'>
+                        <div>
+                            <button type="button" class="btn btn-danger" disabled>{{this.burrito_name}}</button>
+                        </div>
                     </div>
+                    {{/if}}
+                    {{/each}}
                 </div>
-                {{/if}}
-                {{/each}}
             </div>
         </div>
     </div>
 </main>
 
-<h2>Add A Burrito Option</h2>
+
 
 <div class="row">
     <div class="col s12">
-        <form action="/burritos/{{this.id}}?_method=PUT" method="POST">
-            <input type="text" id="name" name="burrito_name" placeholder="Uber Delicious Burrito">
-            <button type="submit" class="addBurritoButton">Add The Burrito</button>
-        </form>
+        <div class="burrito-form-container text-center">
+            <h2>Make your own burrito!</h2>
+            <form action="/burritos/{{this.id}}?_method=PUT" method="POST">
+                <input type="text" id="name" name="burrito_name" size="35" style="padding: 10px;"
+                    placeholder="What kind???">
+                <button type="submit" class="btn btn-info addBurritoButton">Make da burrito!</button>
+            </form>
+        </div>
     </div>
 </div>
