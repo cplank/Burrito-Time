@@ -1,12 +1,14 @@
+//requiring the orm exported by orm.js
 const orm = require("../config/orm.js");
 
+//creating the burrito object full of the SQL queries 
 var burrito = {
     all: function (cb) {
         orm.all("burritos", cb);
     },
 
     create: function (row, cb) {
-        console.log('about to create', row);
+
         orm.create("burritos", row, cb);
     },
     update: function (col, cond, cb) {
@@ -17,5 +19,5 @@ var burrito = {
     }
 };
 
-
+//export the burrito object for use in burritos_controller
 module.exports = burrito;
