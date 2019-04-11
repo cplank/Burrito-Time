@@ -3,7 +3,7 @@ var express = require("express");
 var router = express.Router();
 
 
-var burrito = require("../models/burritos")
+var burrito = require("../models/burritos.js")
 
 
 router.get("/", function (req, res) {
@@ -17,23 +17,23 @@ router.get("/", function (req, res) {
 })
 
 
-router.post("/api/burritos", function (req, res) {
-
-    burrito.create(["burrito_name", "devoured"], [req.body.burrito_name, req.body.devoured], function (result) {
-
-        console.log(res.json({ id: result.insertId }));
+router.post("/burritos", function (req, res) {
+    // res.send(req.body);
+    const row = { ...req.body, devoured: false }
+    burrito.create(row, function (result) {
+        console.log(result)
+        res.json({ id: result.insertId });
 
     });
 });
 
-router.put("/api/burritos/:id", function (req, res) {
-    var condition = "id = " + req.params.id;
-
+router.post("/burritos/:id", function (req, res) {
+    var condition = parseInt(req.params.id);
     console.log("condition", condition);
 
     burrito.update(
         {
-            devoured: req.body.devoured
+            devoured: true
         },
         condition,
         function (result) {
@@ -41,7 +41,13 @@ router.put("/api/burritos/:id", function (req, res) {
                 // If no rows were changed, then the ID must not exist, so 404
                 return res.status(404).end();
             }
-            res.status(200).end();
+            burrito.all(function (data) {
+                var hbsObject = {
+                    burritos: data
+                };
+                console.log(hbsObject);
+                res.render("index", hbsObject);
+            })
 
         }
     );

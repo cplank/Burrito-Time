@@ -24,10 +24,10 @@ var orm = {
 
     },
 
-    update: function (table, col, cond, cb) {
-        let queryString = "UPDATE ?? SET ?? WHERE ?";
+    update: function (table, colVal, id, cond, cb) {
+        let queryString = `UPDATE ?? SET ? WHERE ${connection.escapeId(id)} = ?`;
         // cond: {id: whatever} ==> id = "whatever"
-        connection.query(queryString, [table, col, cond], function (err, result) {
+        connection.query(queryString, [table, colVal, cond], function (err, result) {
             if (err) {
                 throw err;
             }

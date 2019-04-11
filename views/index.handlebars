@@ -34,9 +34,16 @@
 
 <div class="row">
     <div class="col s12">
-        <form action="/api/burritos" method="POST">
+        <form action="/burritos/{{this.id}}?_method=PUT" method="POST">
             <input type="text" id="name" name="burrito_name" placeholder="Uber Delicious Burrito">
-            <button class="addBurritoButton">Add The Burrito</button>
+            <button type="submit" class="addBurritoButton">Add The Burrito</button>
         </form>
     </div>
 </div>
+
+{{!-- <script type="text/javascript">
+    $(".submit").on("click", function (event) {
+        event.preventDefault();
+    })
+
+</script> --}}
