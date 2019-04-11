@@ -22,7 +22,13 @@ router.post("/burritos", function (req, res) {
     const row = { ...req.body, devoured: false }
     burrito.create(row, function (result) {
         console.log(result)
-        res.json({ id: result.insertId });
+        burrito.all(function (data) {
+            var hbsObject = {
+                burritos: data
+            };
+            console.log(hbsObject);
+            res.render("index", hbsObject);
+        })
 
     });
 });
